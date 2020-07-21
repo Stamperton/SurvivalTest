@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b755e272585648443a78ba9d592ee873, type: 3}
+  m_Name: Cooked_Fish
+  m_EditorClassIdentifier: 
+  recipeName: Cooked Fish
+  resourceToCraft: {fileID: 9145148884659082247, guid: 62d8ae0cf3456014fa91497076a9a7f8,
+    type: 3}
+  costOfRecipe:
+  - materialType: {fileID: 7678043530923836081, guid: 421745c67f30d7649886b6ae51d33132,
+      type: 3}
+    materialCost: 1
+  craftingTime: 1

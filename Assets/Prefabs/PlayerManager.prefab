@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3398365101726891355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3398365101726891365}
+  - component: {fileID: 3398365101726891354}
+  - component: {fileID: 3398365101726891364}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3398365101726891365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398365101726891355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3398365101726891354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398365101726891355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5296d0cf637e42e4b97e94ffff775354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryEntries:
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  - resource: {fileID: 0}
+    resourceType: 0
+    quantityHeld: 0
+  GUIInventorySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  droppedItemsPrefab: {fileID: 0}
+  droppedItemSpawnPoint: {fileID: 0}
+  currentStorage: {fileID: 0}
+  canToggleInventory: 1
+  inventoryPanel: {fileID: 0}
+  equipmentPanel: {fileID: 0}
+  useButton: {fileID: 0}
+  equipButton: {fileID: 0}
+  discardPanel: {fileID: 0}
+  itemInteractionPanel: {fileID: 0}
+--- !u!114 &3398365101726891364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398365101726891355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9613dee8b8a23624fb45b01635f900c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blankIcon: {fileID: 21300000, guid: 0fc9f9ef808c2824c9f88fbf588d0abf, type: 3}
+  lastState: 0
+  currentState: 0
