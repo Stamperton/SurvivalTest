@@ -158,6 +158,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1824321415246225362, guid: a7dd5b73be1bd134db61fc60c94067f3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 330711857513343556, guid: a7dd5b73be1bd134db61fc60c94067f3,
         type: 3}
       propertyPath: m_Layer
@@ -278,49 +283,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildableFurnace
       objectReference: {fileID: 0}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: buildingName
-      value: Basic Furnace
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.data[0].materialType
-      value: 
-      objectReference: {fileID: 4544436504739704726, guid: 6663aec11f8f4ad449123750b173f951,
-        type: 3}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.data[0].materialCost
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.data[1].materialType
-      value: 
-      objectReference: {fileID: 679010643850332212, guid: 82453103146df0f4f8731919443977f3,
-        type: 3}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.data[1].materialCost
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.data[2].materialType
-      value: 
-      objectReference: {fileID: 1601116572717403771, guid: 9ed71f01b012b3e4699d1345bbb5a7d7,
-        type: 3}
-    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
-        type: 3}
-      propertyPath: totalCost.Array.data[2].materialCost
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6793637780964511965, guid: e6213325d75985f448e9d4478b316749,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -375,6 +337,59 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839577273504850609, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: buildingName
+      value: Basic Furnace
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.data[0].materialType
+      value: 
+      objectReference: {fileID: 4544436504739704726, guid: 6663aec11f8f4ad449123750b173f951,
+        type: 3}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.data[0].materialCost
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.data[1].materialType
+      value: 
+      objectReference: {fileID: 679010643850332212, guid: 82453103146df0f4f8731919443977f3,
+        type: 3}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.data[1].materialCost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.data[2].materialType
+      value: 
+      objectReference: {fileID: 1601116572717403771, guid: 9ed71f01b012b3e4699d1345bbb5a7d7,
+        type: 3}
+    - target: {fileID: 6192285961289488881, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: totalCost.Array.data[2].materialCost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270567550935674062, guid: e6213325d75985f448e9d4478b316749,
+        type: 3}
+      propertyPath: toolTipText
+      value: Build Simple Furnace
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6213325d75985f448e9d4478b316749, type: 3}

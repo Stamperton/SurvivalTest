@@ -9,7 +9,9 @@ public class PlayerInteraction : MonoBehaviour
     Camera cam;
     RaycastHit rayHit;
 
+    //UI Variables
     public Text tooltipTextBox;
+    public GameObject canBuildIndicator;
 
     //Timer Variables
     float timer;
@@ -17,10 +19,13 @@ public class PlayerInteraction : MonoBehaviour
 
     //Player Variables
     public float interactionRange = 5f;
+    bool canBuild = false;
 
     private void Start()
     {
         cam = GetComponentInChildren<Camera>();
+
+        EnterBuildArea(false);
     }
 
     private void Update()
@@ -33,6 +38,9 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
+            if (!canBuild)
+                return;
+
             if (GameManager.instance.currentState == PlayerState.FPS)
             {
                 GameManager.instance.EnterBuildMode();
@@ -80,4 +88,15 @@ public class PlayerInteraction : MonoBehaviour
                 tooltipTextBox.text = null;
         }
     }
+
+    public void EnterBuildArea(bool _state)
+    {
+        canBuild = _state;
+        canBuildIndicator.SetActive(_state);
+        if (_state == false)
+        {
+            GameManager.instance.ExitBuildMode();
+        }
+    }
+
 }
