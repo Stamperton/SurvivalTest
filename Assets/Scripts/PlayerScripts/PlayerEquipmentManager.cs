@@ -22,6 +22,8 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     Dictionary<PlayerTool, GameObject> toolDictionary = new Dictionary<PlayerTool, GameObject>();
 
+    public PlayerTool currentEquipment;
+
     [Header("Inventory Elements")]
     public InventoryEntry headSlot;
     public GUIInventorySlot headSlotGUI;
@@ -61,8 +63,6 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         switch (toolToEquip.equipmentSlot)
         {
-
-
             case PlayerEquipmentSlot.Head:
 
                 if (headSlot.resource != null)
@@ -114,6 +114,7 @@ public class PlayerEquipmentManager : MonoBehaviour
             UtilityInventory.TransferBetweenInventorySlots(tempEquipmentSlot, originInventoryEntry);
         }
 
+        currentEquipment = toolToEquip.objectToEquip;
 
         toolDictionary.TryGetValue(toolToEquip.objectToEquip, out GameObject _tool);
 
@@ -121,8 +122,6 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         if (toolToEquip.objectToEquip != PlayerTool.None)
             _tool.SetActive(true);
-
-
     }
 
     public void UnequipItem(ResourceTool itemToUnequip)
@@ -153,6 +152,8 @@ public class PlayerEquipmentManager : MonoBehaviour
     void ResetEquipmentState()
     {
         UtilityInventory.ResetInventorySlot(tempEquipmentSlot);
+
+        currentEquipment = PlayerTool.None;
 
         axe.SetActive(false);
         pickaxe.SetActive(false);

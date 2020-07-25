@@ -82,11 +82,14 @@ public class PlayerInteraction : MonoBehaviour
             CrosshairTooltip tooltip = rayHit.collider.GetComponent<CrosshairTooltip>();
             if (tooltip != null)
             {
+                tooltip.UpdateText();
                 tooltipTextBox.text = tooltip.toolTipText;
             }
             else
                 tooltipTextBox.text = null;
         }
+        else
+            tooltipTextBox.text = null;
     }
 
     public void EnterBuildArea(bool _state)

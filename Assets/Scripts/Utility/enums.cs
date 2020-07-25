@@ -16,7 +16,9 @@ public enum PlayerTool
     None,
     Pickaxe,
     Axe,
-    Spear
+    Spear,
+    Crowbar,
+    Gun
 }
 
 public enum PlayerEquipmentSlot

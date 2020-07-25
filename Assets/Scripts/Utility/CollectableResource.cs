@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectableResource : MonoBehaviour, IInteractable
+public class CollectableResource : SubjectBase, IInteractable
 {
     public PlayerTool requiredTool;
+
+    TextWithImage textToSend = new TextWithImage();
 
     public Resource resource;
     public Vector2 quantityRange = new Vector2(1, 1);
@@ -36,14 +38,21 @@ public class CollectableResource : MonoBehaviour, IInteractable
             if (PlayerInventory.instance.CollectSomething(resource))
             {
                 quantityHeld--;
-
-                if (quantityHeld <= 0)
-                {
-                    this.gameObject.SetActive(false);
-                    return;
-                }
             }
         }
 
+        textToSend.text = resource.resourceName;
+        if (collectionAmount > 1)
+        {
+            textToSend.text += " x " + collectionAmount;
+        }
+
+        Notify(textToSend);
+
+        if (quantityHeld <= 0)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
     }
 }
