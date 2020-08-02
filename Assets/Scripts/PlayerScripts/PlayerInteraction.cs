@@ -33,7 +33,7 @@ public class PlayerInteraction : MonoBehaviour
         //ToggleInventory
         if (Input.GetKeyDown(KeyCode.I))
         {
-            PlayerInventory.instance.ToggleInventoryAndEquipment();
+            PlayerInventory.instance.ToggleInventory();
         }
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -41,21 +41,21 @@ public class PlayerInteraction : MonoBehaviour
             if (!canBuild)
                 return;
 
-            if (GameManager.instance.currentState == PlayerState.FPS)
+            if (GameManager.instance.currentState == E_PlayerState.FPS)
             {
                 GameManager.instance.EnterBuildMode();
             }
-            else if (GameManager.instance.currentState == PlayerState.Build)
+            else if (GameManager.instance.currentState == E_PlayerState.Build)
             {
                 GameManager.instance.ExitBuildMode();
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && GameManager.instance.currentState != PlayerState.Canvas)
+        if (Input.GetMouseButtonDown(0) && GameManager.instance.currentState != E_PlayerState.Canvas)
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, interactionRange))
             {
-                Debug.Log(rayHit.collider.name);
+                //Debug.Log(rayHit.collider.name);
 
                 IInteractable currentInteractable = rayHit.collider.GetComponent<IInteractable>();
                 if (currentInteractable != null)

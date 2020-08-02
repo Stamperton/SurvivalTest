@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
     public Sprite blankIcon;
 
 
-    public PlayerState lastState;
-    public PlayerState currentState = PlayerState.FPS;
+    public E_PlayerState lastState;
+    public E_PlayerState currentState = E_PlayerState.FPS;
 
     public event Action onEnterBuildMode;
     public event Action onExitBuildMode;
@@ -34,14 +34,14 @@ public class GameManager : MonoBehaviour
     public void EnterBuildMode()
     {
         Debug.Log("Entered Build Mode");
-        currentState = PlayerState.Build;
+        currentState = E_PlayerState.Build;
         onEnterBuildMode?.Invoke();
     }
 
     public void ExitBuildMode()
     {
         Debug.Log("Exited Build Mode");
-        currentState = PlayerState.FPS;
+        currentState = E_PlayerState.FPS;
         onExitBuildMode?.Invoke();
     }
 }

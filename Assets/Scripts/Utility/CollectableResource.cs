@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectableResource : SubjectBase, IInteractable
 {
-    public PlayerTool requiredTool;
+    public E_ToolType requiredTool;
 
     TextWithImage textToSend = new TextWithImage();
 
@@ -21,13 +21,16 @@ public class CollectableResource : SubjectBase, IInteractable
             resource = GetComponent<Resource>();
 
         quantityHeld = Random.Range((int)quantityRange.x, (int)quantityRange.y);
+
+        AddObserver(FindObjectOfType<MessageManager>());
     }
 
     public virtual void Interact()
     {
-        if (requiredTool != PlayerTool.None)
-            if (PlayerEquipmentManager.instance.handSlot.resource == null || PlayerEquipmentManager.instance.handSlot.resource.objectToEquip != requiredTool)
+        if (requiredTool != E_ToolType.None)
+            if (!PlayerEquipmentManager.instance.CheckToolType(requiredTool))
                 return;
+
 
         collectionAmount = Random.Range((int)collectionRange.x, (int)collectionRange.y);
         if (collectionAmount > quantityHeld)
@@ -38,16 +41,29 @@ public class CollectableResource : SubjectBase, IInteractable
             if (PlayerInventory.instance.CollectSomething(resource))
             {
                 quantityHeld--;
+
+                if (requiredTool != E_ToolType.None)
+                {
+                    PlayerEquipmentManager.instance.DamageItem(E_EquipmentSlot.Hands);
+                }
             }
         }
 
         textToSend.text = resource.resourceName;
+
         if (collectionAmount > 1)
         {
             textToSend.text += " x " + collectionAmount;
         }
 
         Notify(textToSend);
+        Debug.Log("textToSend");
+
+        GrowingPlot _plot = GetComponentInParent<GrowingPlot>();
+        if (_plot != null)
+        {
+            _plot.OnHarvestPlant();
+        }
 
         if (quantityHeld <= 0)
         {

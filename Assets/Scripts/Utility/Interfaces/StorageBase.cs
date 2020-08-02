@@ -66,7 +66,6 @@ public class StorageBase : MonoBehaviour
     public virtual void Interact()
     {
         canvasGUI.gameObject.SetActive(true);
-        PlayerInventory.instance.ToggleInventoryAndEquipment(false);
         PlayerInventory.instance.ToggleInventory(true);
         PlayerInventory.instance.currentStorage = this;
 
@@ -77,6 +76,7 @@ public class StorageBase : MonoBehaviour
     {
         canvasGUI.gameObject.SetActive(false);
         PlayerInventory.instance.ToggleInventory(false);
+
         PlayerInventory.instance.currentStorage = null;
 
         MouseHandling.MouseToFPSMode();

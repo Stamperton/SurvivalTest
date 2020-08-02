@@ -6,7 +6,7 @@ using UnityEngine;
 public class InventoryEntry
 {
     public Resource resource;
-    public BuildingMaterials resourceType;
+    public E_ResourceType resourceType;
 
     public int quantityHeld;
 }

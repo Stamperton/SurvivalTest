@@ -68,8 +68,8 @@ public class MessageManager : MonoBehaviour, ObserverBase
     void Start()
     {
         // Search for the message manager and add it to the list of objects observing this
-        foreach (CollectableResource _collectableResource in FindObjectsOfType<CollectableResource>())
-            _collectableResource.AddObserver(this);
+        //foreach (CollectableResource _collectableResource in FindObjectsOfType<CollectableResource>())
+            //_collectableResource.AddObserver(this);
     }
     // Update is called once per frame
     void Update()

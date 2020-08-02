@@ -7,6 +7,7 @@ public static class MouseHandling
 
     public static void MouseToFPSMode()
     {
+        ItemInteractionPanel.instance.CloseItemPanel();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
@@ -19,10 +20,10 @@ public static class MouseHandling
         Cursor.lockState = CursorLockMode.None;
         Time.timeScale = Mathf.Epsilon;
 
-        if (GameManager.instance.lastState != GameManager.instance.currentState && GameManager.instance.currentState != PlayerState.Canvas)
+        if (GameManager.instance.lastState != GameManager.instance.currentState && GameManager.instance.currentState != E_PlayerState.Canvas)
             GameManager.instance.lastState = GameManager.instance.currentState;
 
-        GameManager.instance.currentState = PlayerState.Canvas;
+        GameManager.instance.currentState = E_PlayerState.Canvas;
 
     }
 

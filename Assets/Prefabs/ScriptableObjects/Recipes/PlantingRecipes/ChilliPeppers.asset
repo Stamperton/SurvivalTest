@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b387d066a37c4db5261d457112856, type: 3}
+  m_Name: ChilliPeppers
+  m_EditorClassIdentifier: 
+  recipeName: Chilli Peppers
+  requiredSeed: 21
+  seed: {fileID: 2394739007232858602, guid: 69cff1872f699f747a5f4e3f5812afe5, type: 3}
+  plantGrowStates:
+  - {fileID: 4139314881758451498, guid: 1a3899e3dd918d04c9aa4c7b041f39fe, type: 3}
+  - {fileID: 5328878026231995216, guid: 700a464e963be02499c27731830d2b85, type: 3}
+  - {fileID: 4719554002825580916, guid: 67d5b039da882894da3e29a298219383, type: 3}
+  - {fileID: 1893587377759591583, guid: 5cf6c7041170f4840b76abdcb6686da8, type: 3}
+  plantResource: {fileID: 1893587377759591570, guid: 5cf6c7041170f4840b76abdcb6686da8,
+    type: 3}
+  seedAmountRange: {x: 2, y: 4}
+  growingTime: 10

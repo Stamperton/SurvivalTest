@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerEquipmentManager : MonoBehaviour
 {
@@ -20,19 +21,17 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     #endregion
 
-    Dictionary<PlayerTool, GameObject> toolDictionary = new Dictionary<PlayerTool, GameObject>();
+    ItemInteractionPanel itemPanel;
 
-    public PlayerTool currentEquipment;
+    Dictionary<E_ToolType, GameObject> toolDictionary = new Dictionary<E_ToolType, GameObject>();
+
+    public E_ToolType equippedTool;
 
     [Header("Inventory Elements")]
     public InventoryEntry headSlot;
-    public GUIInventorySlot headSlotGUI;
     public InventoryEntry torsoSlot;
-    public GUIInventorySlot torsoSlotGUI;
     public InventoryEntry handSlot;
-    public GUIInventorySlot handSlotGUI;
     public InventoryEntry legSlot;
-    public GUIInventorySlot legSlotGUI;
 
 
     [Header("Tool GameObjects")]
@@ -40,147 +39,134 @@ public class PlayerEquipmentManager : MonoBehaviour
     public GameObject pickaxe;
     public GameObject spear;
 
-    public InventoryEntry tempEquipmentSlot;
-
     private void Start()
     {
-        toolDictionary.Add(PlayerTool.Axe, axe);
-        toolDictionary.Add(PlayerTool.Pickaxe, pickaxe);
-        toolDictionary.Add(PlayerTool.Spear, spear);
+        itemPanel = ItemInteractionPanel.instance;
+
+        InitDictionaries();
 
         ResetEquipmentState();
     }
 
-    private void Update()
+    void InitDictionaries()
     {
-        //ONLY FOR TESTING, NOT EVEN REMOTELY NICE ON YOUR PC
-        UpdateUI();
+        toolDictionary.Add(E_ToolType.Axe, axe);
+        toolDictionary.Add(E_ToolType.Pickaxe, pickaxe);
+        toolDictionary.Add(E_ToolType.Spear, spear);
     }
 
-    public void EquipItem(ResourceTool toolToEquip, InventoryEntry originInventoryEntry)
+
+    public void DamageItem(E_EquipmentSlot _slot)
     {
-        ResetEquipmentState();
+        switch (_slot)
+        {
+            case E_EquipmentSlot.Head:
+                headSlot.resource.currentDurability--;
+                break;
+            case E_EquipmentSlot.Torso:
+                torsoSlot.resource.currentDurability--;
+                break;
+            case E_EquipmentSlot.Hands:
+                handSlot.resource.currentDurability--;
+                break;
+            case E_EquipmentSlot.Legs:
+                legSlot.resource.currentDurability--;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public bool CheckToolType(E_ToolType _tool)
+    {
+        if (equippedTool == _tool)
+            return true;
+        else
+            return false;
+    }
+
+    public void EquipItem(Resource toolToEquip)
+    {
+        if (toolToEquip.objectToEquip == equippedTool)
+        {
+            UnequipItem(toolToEquip);
+            return;
+        }
 
         switch (toolToEquip.equipmentSlot)
         {
-            case PlayerEquipmentSlot.Head:
-
+            case E_EquipmentSlot.Head:
                 if (headSlot.resource != null)
-                {
-                    tempEquipmentSlot.resource = headSlot.resource;
-                    tempEquipmentSlot.quantityHeld = headSlot.quantityHeld;
-                    UtilityInventory.ResetInventorySlot(headSlot);
-                }
-
-                UtilityInventory.TransferBetweenInventorySlots(originInventoryEntry, headSlot);
+                    UnequipItem(headSlot.resource);
+                headSlot.resource = toolToEquip;
                 break;
-
-            case PlayerEquipmentSlot.Torso:
+            case E_EquipmentSlot.Torso:
                 if (torsoSlot.resource != null)
-                {
-                    tempEquipmentSlot.resource = torsoSlot.resource;
-                    tempEquipmentSlot.quantityHeld = torsoSlot.quantityHeld;
-                    UtilityInventory.ResetInventorySlot(torsoSlot);
-                }
-                //torsoSlot.resource = toolToEquip;
-                UtilityInventory.TransferBetweenInventorySlots(originInventoryEntry, torsoSlot);
+                    UnequipItem(torsoSlot.resource);
+                torsoSlot.resource = toolToEquip;
                 break;
-            case PlayerEquipmentSlot.Hands:
+            case E_EquipmentSlot.Hands:
                 if (handSlot.resource != null)
-                {
-                    tempEquipmentSlot.resource = handSlot.resource;
-                    tempEquipmentSlot.quantityHeld = handSlot.quantityHeld;
-                    UtilityInventory.ResetInventorySlot(handSlot);
-                }
-                //handSlot.resource = toolToEquip;
-                UtilityInventory.TransferBetweenInventorySlots(originInventoryEntry, handSlot);
+                    UnequipItem(handSlot.resource);
+                handSlot.resource = toolToEquip;
                 break;
-            case PlayerEquipmentSlot.Legs:
+            case E_EquipmentSlot.Legs:
                 if (legSlot.resource != null)
-                {
-                    tempEquipmentSlot.resource = legSlot.resource;
-                    tempEquipmentSlot.quantityHeld = legSlot.quantityHeld;
-                    UtilityInventory.ResetInventorySlot(legSlot);
-                }
-                //legSlot.resource = toolToEquip;
-                UtilityInventory.TransferBetweenInventorySlots(originInventoryEntry, legSlot);
+                    UnequipItem(legSlot.resource);
+                legSlot.resource = toolToEquip;
                 break;
             default:
                 break;
         }
 
-        if (tempEquipmentSlot.resource != null)
-        {
-            UtilityInventory.TransferBetweenInventorySlots(tempEquipmentSlot, originInventoryEntry);
-        }
-
-        currentEquipment = toolToEquip.objectToEquip;
+        equippedTool = toolToEquip.objectToEquip;
 
         toolDictionary.TryGetValue(toolToEquip.objectToEquip, out GameObject _tool);
 
         toolToEquip.isEquipped = true;
 
-        if (toolToEquip.objectToEquip != PlayerTool.None)
+        if (toolToEquip.objectToEquip != E_ToolType.None)
             _tool.SetActive(true);
     }
 
-    public void UnequipItem(ResourceTool itemToUnequip)
+
+    public void UnequipItem(Resource itemToUnequip)
     {
+        Debug.Log("Equipment Manager Unequip");
+
         itemToUnequip.isEquipped = false;
+
+        ResetEquipmentState();
 
         switch (itemToUnequip.equipmentSlot)
         {
-            case PlayerEquipmentSlot.Head:
+            case E_EquipmentSlot.Head:
                 headSlot.resource = null;
                 break;
-            case PlayerEquipmentSlot.Torso:
+            case E_EquipmentSlot.Torso:
                 torsoSlot.resource = null;
                 break;
-            case PlayerEquipmentSlot.Hands:
+            case E_EquipmentSlot.Hands:
                 handSlot.resource = null;
                 break;
-            case PlayerEquipmentSlot.Legs:
+            case E_EquipmentSlot.Legs:
                 legSlot.resource = null;
                 break;
             default:
                 break;
         }
 
-        ResetEquipmentState();
+
     }
+
 
     void ResetEquipmentState()
     {
-        UtilityInventory.ResetInventorySlot(tempEquipmentSlot);
-
-        currentEquipment = PlayerTool.None;
+        equippedTool = E_ToolType.None;
 
         axe.SetActive(false);
         pickaxe.SetActive(false);
         spear.SetActive(false);
     }
-
-    void UpdateUI()
-    {
-        if (headSlot.resource != null)
-            headSlotGUI.image.sprite = headSlot.resource.icon;
-        else
-            headSlotGUI.image.sprite = GameManager.instance.blankIcon;
-
-        if (torsoSlot.resource != null)
-            torsoSlotGUI.image.sprite = torsoSlot.resource.icon;
-        else
-            torsoSlotGUI.image.sprite = GameManager.instance.blankIcon;
-
-        if (handSlot.resource != null)
-            handSlotGUI.image.sprite = handSlot.resource.icon;
-        else
-            handSlotGUI.image.sprite = GameManager.instance.blankIcon;
-
-        if (legSlot.resource != null)
-            legSlotGUI.image.sprite = legSlot.resource.icon;
-        else
-            legSlotGUI.image.sprite = GameManager.instance.blankIcon;
-
-    }
 }
+

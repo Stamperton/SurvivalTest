@@ -58,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -69,6 +70,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -91,9 +93,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2d56fe2ad841a4f429c64626c08eaae5, type: 3}
 --- !u!114 &3571149858199993957
 MonoBehaviour:
@@ -126,13 +128,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: Metal Ingot
+  resourceText: A useful lump of refined Metal
   icon: {fileID: 21300000, guid: 29290081ffeca5241bf8a3302193c517, type: 3}
   resourceType: 7
   maxStackSize: 5
   quantityProduced: 1
   isUsable: 0
+  useType: 0
+  useValue: 0
   isEquippable: 0
+  equipmentSlot: 0
   objectToEquip: 0
+  maxDurability: 0
+  currentDurability: 0
+  isEquipped: 0
 --- !u!114 &8735777876218145741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,8 +7,15 @@ public class StorageBox : StorageBase, IInteractable
 {
     Animator anim;
 
+    public Text storageTitleText;
+
+    public string storageName;
+
     private void Start()
     {
+        if (storageTitleText != null)
+            storageTitleText.text = storageName;
+
         anim = GetComponent<Animator>();
         //boxCanvas = GetComponentInChildren<Canvas>();
 

@@ -7,31 +7,22 @@ public class GrowingPlot : StorageBase, IInteractable
     public GameObject plantPlot;
     public SO_PlantingRecipe[] growingRecipes;
 
-    public BoxCollider harvestCollider;
-    CrosshairTooltip plotTooltip;
+    GameObject growingPlant;
 
     SO_PlantingRecipe currentRecipe;
-    GameObject growingPlant;
+
     public InventoryEntry seedInventoryEntry;
 
     float timer = 0f;
-
-    public Resource startingSeed;
-    public bool blockPlanting = false;
+    int currentGrowState = 0;
 
     bool isPlanted;
-    bool canHarvest;
 
     private void Start()
     {
-        harvestCollider.enabled = false;
-        plotTooltip = GetComponent<CrosshairTooltip>();
-        canvasGUI.gameObject.SetActive(false);
+        UpdateUI();
 
-        if (startingSeed != null)
-        {
-            UtilityInventory.CreateInInventorySlot(inventoryEntries[0], startingSeed);
-        }
+        canvasGUI.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -47,17 +38,10 @@ public class GrowingPlot : StorageBase, IInteractable
 
     public override void Interact()
     {
-        if (isPlanted && !canHarvest)
+        if (isPlanted)
             return;
 
-        else if (canHarvest)
-        {
-            HarvestPlant();
-            return;
-        }
-
-        else if (!blockPlanting)
-            base.Interact();
+        base.Interact();
     }
 
     public void CheckRecipe()
@@ -69,100 +53,69 @@ public class GrowingPlot : StorageBase, IInteractable
 
         for (int i = 0; i < growingRecipes.Length; i++)
         {
-            if (inventoryEntries[0].resourceType == growingRecipes[i].requiredSeed)
+            if (inventoryEntries[0].resource.resourceType == growingRecipes[i].requiredSeed)
             {
-                currentRecipe = growingRecipes[i];
-                growingPlant = Instantiate(currentRecipe.plantToGrow, plantPlot.transform.position, plantPlot.transform.rotation);
-                growingPlant.transform.localScale = Vector3.zero;
-                growingPlant.transform.SetParent(plantPlot.transform);
                 UtilityInventory.DecrementInventorySlot(inventoryEntries[0]);
+                currentRecipe = growingRecipes[i];
+
+                currentGrowState = 0;
 
                 UpdateUI();
-                CloseStorage();
-                isPlanted = true;
-                StartCoroutine(GrowPlant());
 
-                //canHarvest = true;
+                CloseStorage();
+
+                isPlanted = true;
+
+                StartCoroutine(IE_GrowPlant());
+
+                return;
             }
         }
     }
 
-    void HarvestPlant()
+    public void OnHarvestPlant()
     {
-        if (UtilityInventory.CheckSameUseThenEmpty(PlayerInventory.instance.inventoryEntries, currentRecipe.plantResource, out InventoryEntry _entry))
-        {
-            UtilityInventory.CreateInInventorySlot(_entry, currentRecipe.plantResource);
-        }
-        else
-            return;
-
         //Populate SeedEntry with Random number of Seeds
         UtilityInventory.ResetInventorySlot(seedInventoryEntry);
         int seedAmount = Mathf.CeilToInt(Random.Range(currentRecipe.seedAmountRange.x, currentRecipe.seedAmountRange.y));
-        UtilityInventory.CreateInInventorySlot(seedInventoryEntry, currentRecipe.plantSeed);
+        UtilityInventory.CreateInInventorySlot(seedInventoryEntry, currentRecipe.seed);
         if (seedAmount > 1)
         {
             for (int i = 0; i < seedAmount - 1; i++)
             {
-                UtilityInventory.IncrementInventorySlot(seedInventoryEntry, currentRecipe.plantSeed);
+                UtilityInventory.IncrementInventorySlot(seedInventoryEntry, currentRecipe.seed);
             }
         }
 
-        if (UtilityInventory.CheckSameUseThenEmpty(PlayerInventory.instance.inventoryEntries, currentRecipe.plantSeed, out InventoryEntry _seedEntry))
+        if (UtilityInventory.CheckSameUseThenEmpty(PlayerInventory.instance.inventoryEntries, currentRecipe.seed, out InventoryEntry _seedEntry))
         {
             UtilityInventory.TransferWholeStackBetweenInventorySlots(PlayerInventory.instance.inventoryEntries, seedInventoryEntry, seedInventoryEntry.quantityHeld);
         }
         else
             PlayerInventory.instance.DropItem(seedInventoryEntry);
 
-        if (blockPlanting)
-            Destroy(gameObject);
-        else
+        isPlanted = false;
+    }
+
+
+    IEnumerator IE_GrowPlant()
+    {
+        growingPlant = Instantiate(currentRecipe.plantGrowStates[currentGrowState], plantPlot.transform.position, plantPlot.transform.rotation);
+        growingPlant.transform.SetParent(plantPlot.transform);
+
+        for (int i = 0; i < currentRecipe.plantGrowStates.Length -1; i++)
+        {
+            yield return new WaitForSeconds(currentRecipe.growingTime / currentRecipe.plantGrowStates.Length);
+            currentGrowState++;
             Destroy(growingPlant);
 
-
-        harvestCollider.enabled = false;
-        canHarvest = false;
-        isPlanted = false;
-
-    }
-
-    void MakeHarvestable()
-    {
-        PlotTooltip(currentRecipe.recipeName);
-        canHarvest = true;
-    }
-
-    IEnumerator GrowPlant()
-    {
-        harvestCollider.enabled = true;
-        timer = 0;
-
-        PlotTooltip(currentRecipe.recipeName + " (Growing)");
-
-        Vector3 startSize = new Vector3(0, 0, 0);
-        Vector3 maxSize = new Vector3(1, 1, 1);
-
-        do
-        {
-            growingPlant.transform.localScale = Vector3.Lerp(startSize, maxSize, timer / currentRecipe.growingTime);
-            timer += Time.deltaTime;
-            yield return null;
-        } while (timer < currentRecipe.growingTime);
-
-        MakeHarvestable();
-
-    }
-
-    void PlotTooltip(string _text)
-    {
-        if (!blockPlanting)
-        {
-            plotTooltip.toolTipText = _text + "\nGrowing Plot";
+            growingPlant = Instantiate(currentRecipe.plantGrowStates[currentGrowState], plantPlot.transform.position, plantPlot.transform.rotation);
+            growingPlant.transform.SetParent(plantPlot.transform);
+            Debug.Log(currentGrowState);
+                     
         }
-        else
-            plotTooltip.toolTipText = _text;
 
+        StopCoroutine(IE_GrowPlant());
     }
 }
 

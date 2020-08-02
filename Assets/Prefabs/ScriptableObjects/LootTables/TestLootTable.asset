@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd87bd04d1bae14485b1f567b816be2, type: 3}
+  m_Name: TestLootTable
+  m_EditorClassIdentifier: 
+  possibleResources:
+  - resource: {fileID: 3571149858199993956, guid: fe9f0ec0429d3bc49a2d313670c95349,
+      type: 3}
+    resourceType: 7
+    quantityHeld: 3
+  - resource: {fileID: 3571149858199993956, guid: fe9f0ec0429d3bc49a2d313670c95349,
+      type: 3}
+    resourceType: 7
+    quantityHeld: 4
+  - resource: {fileID: 8353229204806548789, guid: d4d0bf1896f661541901bf560b1e7960,
+      type: 3}
+    resourceType: 8
+    quantityHeld: 3
+  - resource: {fileID: 8353229204806548789, guid: d4d0bf1896f661541901bf560b1e7960,
+      type: 3}
+    resourceType: 8
+    quantityHeld: 7
+  - resource: {fileID: 1893587377759591570, guid: 5cf6c7041170f4840b76abdcb6686da8,
+      type: 3}
+    resourceType: 20
+    quantityHeld: 3
+  - resource: {fileID: 4544436504739704726, guid: 6663aec11f8f4ad449123750b173f951,
+      type: 3}
+    resourceType: 12
+    quantityHeld: 4
+  - resource: {fileID: 4544436504739704726, guid: 6663aec11f8f4ad449123750b173f951,
+      type: 3}
+    resourceType: 12
+    quantityHeld: 9
+  - resource: {fileID: 679010643850332212, guid: 82453103146df0f4f8731919443977f3,
+      type: 3}
+    resourceType: 3
+    quantityHeld: 2
+  resourcesInLoot: {x: 3, y: 5}

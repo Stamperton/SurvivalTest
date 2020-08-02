@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CrosshairTooltip : MonoBehaviour
 {
+    [TextArea]
     public string toolTipText;
     string originalText;
 
@@ -31,25 +32,25 @@ public class CrosshairTooltip : MonoBehaviour
         {
             switch (_collectableResource.requiredTool)
             {
-                case PlayerTool.None:
+                case E_ToolType.None:
                     break;
-                case PlayerTool.Pickaxe:
-                    if (PlayerEquipmentManager.instance.currentEquipment != PlayerTool.Pickaxe)
+                case E_ToolType.Pickaxe:
+                    if (PlayerEquipmentManager.instance.equippedTool != E_ToolType.Pickaxe)
                     {
                         toolTipText += "\n(Requires Pickaxe)";
                     }
                     break;
-                case PlayerTool.Axe:
-                    if (PlayerEquipmentManager.instance.currentEquipment != PlayerTool.Axe)
+                case E_ToolType.Axe:
+                    if (PlayerEquipmentManager.instance.equippedTool != E_ToolType.Axe)
                         toolTipText += "\n(Requires Axe)";
                     break;
-                case PlayerTool.Spear:
+                case E_ToolType.Spear:
                     break;
-                case PlayerTool.Crowbar:
-                    if (PlayerEquipmentManager.instance.currentEquipment != PlayerTool.Crowbar)
+                case E_ToolType.Crowbar:
+                    if (PlayerEquipmentManager.instance.equippedTool != E_ToolType.Crowbar)
                         toolTipText += "\n(Requires Crowbar)";
                     break;
-                case PlayerTool.Gun:
+                case E_ToolType.Gun:
                     break;
                 default:
                     break;

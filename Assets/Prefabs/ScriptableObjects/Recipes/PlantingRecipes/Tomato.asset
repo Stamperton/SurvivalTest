@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b387d066a37c4db5261d457112856, type: 3}
+  m_Name: Tomato
+  m_EditorClassIdentifier: 
+  recipeName: Tomato
+  requiredSeed: 17
+  seed: {fileID: 5993766357559168983, guid: cfdfd8cabcc4d0748af3e2b976b201f1, type: 3}
+  plantGrowStates:
+  - {fileID: 7019098617999520136, guid: 23e29087de28703478c8667a962ff075, type: 3}
+  - {fileID: 6625800688252038823, guid: ce8f290cf802fa548afbd48e9cc34135, type: 3}
+  - {fileID: 1586767526186797467, guid: 39539b904b57bc34a99f77ce954abbc8, type: 3}
+  - {fileID: 6904442812951719412, guid: 328fb8d03fd2ba342877beedb1a3080a, type: 3}
+  plantResource: {fileID: 1519673643164345695, guid: 328fb8d03fd2ba342877beedb1a3080a,
+    type: 3}
+  seedAmountRange: {x: 3, y: 5}
+  growingTime: 10
