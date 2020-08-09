@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b755e272585648443a78ba9d592ee873, type: 3}
+  m_Name: Crowbar
+  m_EditorClassIdentifier: 
+  recipeName: Crowbar
+  resourceToCraft: {fileID: 4877432657356078971, guid: 8da2446db74e8044b89b5e176c85bff9,
+    type: 3}
+  costOfRecipe:
+  - materialType: {fileID: 6370473963000612386, guid: 710197f0effb4d442b27aeaa26cc7e91,
+      type: 3}
+    materialCost: 2
+  - materialType: {fileID: 3571149858199993956, guid: fe9f0ec0429d3bc49a2d313670c95349,
+      type: 3}
+    materialCost: 2
+  craftingTime: 0

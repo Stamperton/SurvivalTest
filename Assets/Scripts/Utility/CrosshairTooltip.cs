@@ -9,10 +9,13 @@ public class CrosshairTooltip : MonoBehaviour
     string originalText;
 
     CollectableResource _collectableResource;
+    StorageBox _storageBox;
 
     private void Start()
     {
         _collectableResource = GetComponent<CollectableResource>();
+
+
 
         originalText = toolTipText;
 
@@ -26,6 +29,22 @@ public class CrosshairTooltip : MonoBehaviour
         if (toolTipText == "")
         {
             toolTipText = GetComponent<Resource>().resourceName;
+        }
+
+        _storageBox = GetComponent<StorageBox>();
+
+        if (_storageBox != null)
+        {
+            if (_storageBox.isLocked == true)
+            {
+                toolTipText += "\n(Locked, requires " + _storageBox.keyType.resourceName + ")";
+            }
+
+            if (_storageBox.isLocked == false)
+            {
+                toolTipText += "\n(Unlocked)";
+            }
+
         }
 
         if (_collectableResource != null)

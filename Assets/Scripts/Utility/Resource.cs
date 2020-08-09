@@ -26,7 +26,6 @@ public class Resource : MonoBehaviour
     [HideInInspector]
     public bool isEquipped;
 
-
     public void Use()
     {
         for (int i = 0; i < useTypes.Length; i++)

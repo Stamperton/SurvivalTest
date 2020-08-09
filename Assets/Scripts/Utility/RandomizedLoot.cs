@@ -34,8 +34,6 @@ public class RandomizedLoot : MonoBehaviour
     {
         int _cycleCount = Random.Range(_table.resourcesInLoot.x, _table.resourcesInLoot.y + 1);
 
-        Debug.Log(name + " " + _cycleCount);
-
         for (int i = 0; i < _cycleCount; i++)
         {
             int _entry = Random.Range(0, lootList.Count - 1);

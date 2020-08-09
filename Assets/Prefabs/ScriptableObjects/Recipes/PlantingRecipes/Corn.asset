@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b387d066a37c4db5261d457112856, type: 3}
+  m_Name: Corn
+  m_EditorClassIdentifier: 
+  recipeName: Sweetcorn
+  requiredSeed: 19
+  seed: {fileID: 8815768306050717217, guid: 95985240ff6886447869bdbd42000584, type: 3}
+  plantGrowStates:
+  - {fileID: 371971271382097624, guid: d2888af69f2470645a54ab15433e62ee, type: 3}
+  - {fileID: 5383403897521756785, guid: fc449ba919481034f879212de2dd327e, type: 3}
+  - {fileID: 5651924432984766393, guid: 44dca66573999e945ba5032b3f7ca56c, type: 3}
+  - {fileID: 2534962698145380977, guid: 0413c5ed9fdecb443a101f023c21497d, type: 3}
+  plantResource: {fileID: 7976274091719425858, guid: 0413c5ed9fdecb443a101f023c21497d,
+    type: 3}
+  seedAmountRange: {x: 1, y: 1}
+  growingTime: 10

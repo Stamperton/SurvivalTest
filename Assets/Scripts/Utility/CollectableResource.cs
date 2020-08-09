@@ -9,8 +9,8 @@ public class CollectableResource : SubjectBase, IInteractable
     TextWithImage textToSend = new TextWithImage();
 
     public Resource resource;
-    public Vector2 quantityRange = new Vector2(1, 1);
-    public Vector2 collectionRange = new Vector2(1, 1);
+    public Vector2Int quantityRange = new Vector2Int(1, 1);
+    public Vector2Int collectionRange = new Vector2Int(1, 1);
 
     [HideInInspector] public int quantityHeld;
     [HideInInspector] public int collectionAmount;
@@ -18,9 +18,9 @@ public class CollectableResource : SubjectBase, IInteractable
     private void Start()
     {
         if (resource == null)
-            resource = GetComponent<Resource>();
+            resource = GetComponentInParent<Resource>();
 
-        quantityHeld = Random.Range((int)quantityRange.x, (int)quantityRange.y);
+        quantityHeld = Random.Range(quantityRange.x, quantityRange.y);
 
         AddObserver(FindObjectOfType<MessageManager>());
     }
@@ -32,7 +32,7 @@ public class CollectableResource : SubjectBase, IInteractable
                 return;
 
 
-        collectionAmount = Random.Range((int)collectionRange.x, (int)collectionRange.y);
+        collectionAmount = Random.Range(collectionRange.x, collectionRange.y);
         if (collectionAmount > quantityHeld)
             collectionAmount = quantityHeld;
 

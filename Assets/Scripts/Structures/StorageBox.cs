@@ -9,7 +9,11 @@ public class StorageBox : StorageBase, IInteractable
 
     public Text storageTitleText;
 
-    public string storageName;
+    public bool isLocked = false;
+    public Resource keyType;
+    [SerializeField] bool consumesKey = false;
+
+    [SerializeField] string storageName;
 
     private void Start()
     {
@@ -17,7 +21,6 @@ public class StorageBox : StorageBase, IInteractable
             storageTitleText.text = storageName;
 
         anim = GetComponent<Animator>();
-        //boxCanvas = GetComponentInChildren<Canvas>();
 
         inventoryEntriesGUI = GetComponentsInChildren<GUIInventorySlot>();
 
@@ -36,6 +39,17 @@ public class StorageBox : StorageBase, IInteractable
     //Toggles Canvas and Game Mode.
     public override void Interact()
     {
+        if (isLocked)
+        {
+            if (UtilityInventory.CheckForSameUseInventorySpace(PlayerInventory.instance.inventoryEntries, keyType, out InventoryEntry _entry) == false)
+                return;
+            if (consumesKey)
+                UtilityInventory.DecrementInventorySlot(_entry);
+            isLocked = false;
+        }
+
+
+
         base.Interact();
         anim.SetBool("isOpen", true);
     }

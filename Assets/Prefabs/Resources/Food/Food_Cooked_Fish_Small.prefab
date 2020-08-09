@@ -109,13 +109,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: Small Raw Fish
   resourceText: 
-  icon: {fileID: 21300000, guid: d659fbc310663ab409cc8883d5d14375, type: 3}
+  icon: {fileID: 21300000, guid: 54575fea8f99d06428b079779b814034, type: 3}
   resourceType: 16
   maxStackSize: 10
   quantityProduced: 1
   isUsable: 1
-  useType: 1
-  useValue: 25
+  useTypes: []
   isEquippable: 0
   equipmentSlot: 0
   objectToEquip: 0

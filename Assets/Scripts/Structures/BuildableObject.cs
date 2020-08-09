@@ -12,10 +12,11 @@ public class BuildableObject : MonoBehaviour, IInteractable
     public Text playerCostText;
     public Text buildingNameText;
 
-    public GameObject BuildingOutline;
+    public GameObject GhostOutline;
+    public GameObject SolidOutline;
     public GameObject ActualBuilding;
 
-    Collider thisCollider;
+    Collider[] thisCollider;
 
     Canvas BuildCanvas;
 
@@ -27,7 +28,7 @@ public class BuildableObject : MonoBehaviour, IInteractable
         BuildCanvas = GetComponentInChildren<Canvas>();
         BuildCanvas.enabled = false;
 
-        thisCollider = GetComponent<Collider>();
+        thisCollider = GetComponents<Collider>();
 
         GameManager.instance.onEnterBuildMode += MakeBuildingOutlineVisible;
         GameManager.instance.onExitBuildMode += MakeBuildingOutlineInvisible;
@@ -45,26 +46,34 @@ public class BuildableObject : MonoBehaviour, IInteractable
         playerCostText.text = null;
         foreach (ResourceCost cost in totalCost)
         {
-            buildingCostText.text += String.Format("{0} x {1}\n", cost.materialType.resourceType, cost.materialCost);
+            buildingCostText.text += String.Format("{0} x {1}\n", cost.materialType.resourceName, cost.materialCost);
         }
 
         foreach (ResourceCost cost in totalCost)
         {
             int materialCount = UtilityInventory.TotalOfTypeInInventory(PlayerInventory.instance.inventoryEntries, cost.materialType.resourceType);
-            playerCostText.text += String.Format("{0} x {1}\n", cost.materialType.resourceType, materialCount);
+            playerCostText.text += String.Format("{0} x {1}\n", cost.materialType.resourceName, materialCount);
         }
     }
 
     void MakeBuildingOutlineVisible()
     {
-        BuildingOutline.SetActive(true);
-        thisCollider.enabled = true;
+        GhostOutline.SetActive(true);
+        for (int i = 0; i < thisCollider.Length; i++)
+        {
+            thisCollider[i].enabled = true;
+
+        }
     }
 
     void MakeBuildingOutlineInvisible()
     {
-        BuildingOutline.SetActive(false);
-        thisCollider.enabled = false;
+        GhostOutline.SetActive(false);
+        for (int i = 0; i < thisCollider.Length; i++)
+        {
+            thisCollider[i].enabled = false;
+
+        }
     }
 
     public void BuildBuilding()
@@ -74,6 +83,8 @@ public class BuildableObject : MonoBehaviour, IInteractable
 
         MakeBuildingOutlineInvisible();
         ActualBuilding.transform.position = this.transform.position;
+
+        SolidOutline.gameObject.SetActive(false);
 
         BuildCanvas.enabled = false;
         MouseHandling.MouseToFPSMode();
@@ -128,6 +139,6 @@ public class BuildableObject : MonoBehaviour, IInteractable
                 //PlayerInventory.instance.RemoveFromInventory(cost.materialType);
             }
         }
-        
+
     }
 }

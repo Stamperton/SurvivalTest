@@ -50,7 +50,7 @@ public enum E_ResourceType
     MetalRod,
 
     //Stone Materials
-    Stone,
+    Cinderblock,
     Clay,
     Brick,
     Coal,
@@ -58,8 +58,8 @@ public enum E_ResourceType
     //Food Resources
     Tomato,
     TomatoSeed,
-    GreenBean,
-    GreenBeanSeed,
+    Sweetcorn,
+    SweetcornSeed,
     Chilli,
     ChilliSeed,
     Wheat,

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerEquipmentManager : MonoBehaviour
 {
@@ -23,7 +22,8 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     ItemInteractionPanel itemPanel;
 
-    Dictionary<E_ToolType, GameObject> toolDictionary = new Dictionary<E_ToolType, GameObject>();
+    [SerializeField] Transform toolSocket;
+    GameObject currentTool;
 
     public E_ToolType equippedTool;
 
@@ -34,25 +34,11 @@ public class PlayerEquipmentManager : MonoBehaviour
     public InventoryEntry legSlot;
 
 
-    [Header("Tool GameObjects")]
-    public GameObject axe;
-    public GameObject pickaxe;
-    public GameObject spear;
-
     private void Start()
     {
         itemPanel = ItemInteractionPanel.instance;
 
-        InitDictionaries();
-
         ResetEquipmentState();
-    }
-
-    void InitDictionaries()
-    {
-        toolDictionary.Add(E_ToolType.Axe, axe);
-        toolDictionary.Add(E_ToolType.Pickaxe, pickaxe);
-        toolDictionary.Add(E_ToolType.Spear, spear);
     }
 
 
@@ -121,12 +107,20 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         equippedTool = toolToEquip.objectToEquip;
 
-        toolDictionary.TryGetValue(toolToEquip.objectToEquip, out GameObject _tool);
-
         toolToEquip.isEquipped = true;
 
-        if (toolToEquip.objectToEquip != E_ToolType.None)
-            _tool.SetActive(true);
+        currentTool = Instantiate(toolToEquip.gameObject);
+
+        currentTool.gameObject.SetActive(true);
+
+        for (int i = 0; i < currentTool.transform.childCount; i++)
+            currentTool.transform.GetChild(i).gameObject.SetActive(true);
+
+
+        currentTool.transform.SetParent(toolSocket);
+        currentTool.transform.localPosition = Vector3.zero;
+        currentTool.transform.localRotation = Quaternion.identity;
+
     }
 
 
@@ -156,7 +150,6 @@ public class PlayerEquipmentManager : MonoBehaviour
                 break;
         }
 
-
     }
 
 
@@ -164,9 +157,9 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         equippedTool = E_ToolType.None;
 
-        axe.SetActive(false);
-        pickaxe.SetActive(false);
-        spear.SetActive(false);
+        if (currentTool != null)
+            Destroy(currentTool.gameObject);
+
     }
 }
 

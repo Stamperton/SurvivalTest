@@ -17,7 +17,7 @@ public static class MouseHandling
     public static void MouseToCanvasMode()
     {
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Time.timeScale = Mathf.Epsilon;
 
         if (GameManager.instance.lastState != GameManager.instance.currentState && GameManager.instance.currentState != E_PlayerState.Canvas)

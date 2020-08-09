@@ -36,7 +36,6 @@ public class PlayerInventory : MonoBehaviour
     [Header("UI Variables")]
     ItemInteractionPanel itemInteractionPanel;
     [SerializeField] GameObject inventoryPanel;
-    [SerializeField] GameObject equipmentPanel;
 
     //Currently Initialised Button
     int currentButton;
@@ -192,9 +191,9 @@ public class PlayerInventory : MonoBehaviour
         _resource.isEquipped = false;
 
         _collectableResource.quantityHeld = _entry.quantityHeld;
-        _collectableResource.quantityRange = new Vector2(_entry.quantityHeld, _entry.quantityHeld);
+        _collectableResource.quantityRange = new Vector2Int(_entry.quantityHeld, _entry.quantityHeld);
         _collectableResource.collectionAmount = _entry.quantityHeld;
-        _collectableResource.collectionRange = new Vector2(_entry.quantityHeld, _entry.quantityHeld);
+        _collectableResource.collectionRange = new Vector2Int(_entry.quantityHeld, _entry.quantityHeld);
         _collectableResource.requiredTool = E_ToolType.None;
 
         if (_collectableResource.quantityHeld > 1)
@@ -233,9 +232,9 @@ public class PlayerInventory : MonoBehaviour
         _resource.isEquipped = false;
 
         _collectableResource.quantityHeld = _entry.quantityHeld;
-        _collectableResource.quantityRange = new Vector2(_entry.quantityHeld, _entry.quantityHeld);
+        _collectableResource.quantityRange = new Vector2Int(_entry.quantityHeld, _entry.quantityHeld);
         _collectableResource.collectionAmount = _entry.quantityHeld;
-        _collectableResource.collectionRange = new Vector2(_entry.quantityHeld, _entry.quantityHeld);
+        _collectableResource.collectionRange = new Vector2Int(_entry.quantityHeld, _entry.quantityHeld);
         _collectableResource.requiredTool = E_ToolType.None;
 
         if (_collectableResource.quantityHeld > 1)
@@ -275,6 +274,14 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
+    public void CloseInventoryButton()
+    {
+        if (currentStorage)
+            currentStorage.CloseStorage();
+        else
+            ToggleInventory(false);
+    }
+
     public void ToggleInventory(bool active)
     {
         canToggleInventory = !active;
@@ -282,7 +289,6 @@ public class PlayerInventory : MonoBehaviour
         inventoryPanel.SetActive(active);
 
         if (active == true)
-
             MouseHandling.MouseToCanvasMode();
         else
             MouseHandling.MouseToFPSMode();

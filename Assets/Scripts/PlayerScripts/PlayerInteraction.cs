@@ -65,6 +65,11 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerInventory.instance.CloseInventoryButton();
+        }
+
         timer += Time.deltaTime;
         if (timer >= crosshairUpdateDelay)
         {
